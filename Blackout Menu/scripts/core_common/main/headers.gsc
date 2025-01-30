@@ -21,9 +21,8 @@
 #namespace blackoutmenu;
 
 autoexec __init__system__() {
-
-	system::register("blackoutmenu", &__init__, &__post__init__, undefined);
-    callback::add_callback(#"on_pre_initialization", &on_pre_init, undefined);
+	system::register("blackoutmenu", &__init__, undefined);
+    callback::add_callback(#"on_pre_initialization", undefined);
 
     level.CurrentMap = CurrentMapName();
 
@@ -31,17 +30,10 @@ autoexec __init__system__() {
     SetGametypeSettings();
 }
 
-on_pre_init() {
-    return true;
-}
-
 __init__() {
     callback::on_start_gametype(&init);
     callback::on_connect(&onPlayerConnect);
     callback::on_spawned(&onPlayerSpawned);
-}
-
-__post__init__() {
 }
 
 SetupGameSettings(){
