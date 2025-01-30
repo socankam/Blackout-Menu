@@ -48,8 +48,8 @@ SetupGameSettings(){
     self.GameSettings["Enable Snowballs"] = false;
     self.GameSettings["Enable Water Balloons"] = false;
 
-    self.GameSettings["Enable Perks"] = false;
-    self.GameSettings["Enable Armor"] = false;
-    self.GameSettings["Enable Attachments"] = false;
-    self.GameSettings["Enable Health Items"] = false;
+    self.GameSettings["Enable Perks"] = true;
+    self.GameSettings["Enable Armor"] = true;
+    self.GameSettings["Enable Attachments"] = true;
+    self.GameSettings["Enable Health Items"] = true;
 }
