@@ -22,7 +22,6 @@
 
 autoexec __init__system__() {
 	system::register("blackoutmenu", &__init__, undefined);
-    callback::add_callback(#"on_pre_initialization", undefined);
 
     level.CurrentMap = CurrentMapName();
 
