@@ -18,10 +18,15 @@
 #include scripts\core_common\exploder_shared;
 #include scripts\core_common\vehicle_shared.gsc;
 
+#using scripts\core_common\ai_shared;
+#using scripts\core_common\bots\bot_action;
+
 #namespace blackoutmenu;
 
 autoexec __init__system__() {
-	system::register("blackoutmenu", &__init__, undefined);
+
+	system::register("blackoutmenu", &__init__, &__post__init__, undefined);
+    callback::add_callback(#"on_pre_initialization", &on_pre_init, undefined);
 
     level.CurrentMap = CurrentMapName();
 
@@ -29,10 +34,17 @@ autoexec __init__system__() {
     SetGametypeSettings();
 }
 
+on_pre_init() {
+    return true;
+}
+
 __init__() {
     callback::on_start_gametype(&init);
     callback::on_connect(&onPlayerConnect);
     callback::on_spawned(&onPlayerSpawned);
+}
+
+__post__init__() {
 }
 
 SetupGameSettings(){
@@ -48,8 +60,8 @@ SetupGameSettings(){
     self.GameSettings["Enable Snowballs"] = false;
     self.GameSettings["Enable Water Balloons"] = false;
 
-    self.GameSettings["Enable Perks"] = true;
-    self.GameSettings["Enable Armor"] = true;
-    self.GameSettings["Enable Attachments"] = true;
-    self.GameSettings["Enable Health Items"] = true;
+    self.GameSettings["Enable Perks"] = false;
+    self.GameSettings["Enable Armor"] = false;
+    self.GameSettings["Enable Attachments"] = false;
+    self.GameSettings["Enable Health Items"] = false;
 }

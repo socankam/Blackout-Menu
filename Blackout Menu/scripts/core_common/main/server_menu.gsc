@@ -40,10 +40,16 @@ ServerMenu(){
     }
 }
 
-ChangeMap(map) {
-    map(map);
-    wait(1);
-    switchmap_switch();
+ChangeMap(Map) {
+    if (level.CurrentMap == Map){
+        self iPrintLnBold("Map is already loaded!");
+    }
+    else{
+        map(map);
+        wait(1);
+        switchmap_switch();
+    }
+
 }
 
 ChangeMode(mode) {
@@ -51,14 +57,6 @@ ChangeMode(mode) {
     switchmap_load(map, mode);
     wait(1);
     switchmap_switch();
-}
-
-AddBotsToGame(Amount) 
-{
-    for (i = 0; i < int(Amount); i++) {
-        AddTestClient();
-        wait 0.2;
-    }
 }
 
 SuperJump()

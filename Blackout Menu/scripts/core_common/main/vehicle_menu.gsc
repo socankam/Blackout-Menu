@@ -12,7 +12,8 @@ VehicleMenu()
         self addOption("VehicleMenu", "Cargo Trucks", &OpenSubMenu, "SpawnCargoTrucks");
         self addOption("VehicleMenu", "SUVs", &OpenSubMenu, "SpawnSUVs");
     }
-    
+    self addOption("VehicleMenu", "Boats", &OpenSubMenu, "SpawnBoats");
+
     self createMenu("SpawnMuscleCars", "Muscle Cars");
     self addOption("SpawnMuscleCars", "Spawn Heist Muscle Car", &SpawnVehicleModel, "HMC");
     self addOption("SpawnMuscleCars", "Spawn Blue Muscle Car", &SpawnVehicleModel, "BMC");
@@ -60,6 +61,16 @@ VehicleMenu()
     self addOption("SpawnSUVs", "Spawn Silver SUV", &SpawnVehicleModel, "SUVSilver");
     self addOption("SpawnSUVs", "Spawn White SUV", &SpawnVehicleModel, "SUVWhite");
     self addOption("SpawnSUVs", "Spawn Black Light SUV", &SpawnVehicleModel, "SUVBlackLight");
+
+    self createMenu("SpawnBoats", "Boats");
+    self addOption("SpawnBoats", "Black Raft", &SpawnVehicleModel, "BlackRaft");
+    self addOption("SpawnBoats", "Grey Raft", &SpawnVehicleModel, "GreyRaft");
+    
+    if(level.CurrentMap == "wz_open_skyscrapers"){
+        self addOption("SpawnBoats", "Tan Military Boat", &SpawnVehicleModel, "TanBoat");
+        self addOption("SpawnBoats", "Tan Military Boat", &SpawnVehicleModel, "BlackBoat");
+        self addOption("SpawnBoats", "Police Military Boat", &SpawnVehicleModel, "PoliceBoat");
+    }
 }
 
 init_vehicles()
@@ -114,6 +125,15 @@ init_vehicles()
     self.VehicleHashMap["SUVSilver"] = #"hash_6a5a5607b259798f";
     self.VehicleHashMap["SUVWhite"] = #"hash_6d35ebfe40e6564f";
     self.VehicleHashMap["SUVBlackLight"] = #"hash_2e86e4a61f2237f6";
+
+    //Boats
+    self.VehicleHashMap["BlackRaft"] =  #"vehicle_boct_mil_boat_tactical_raft_wz_blk";
+    self.VehicleHashMap["GreyRaft"] =  #"vehicle_boct_mil_boat_tactical_raft_wz_blk";
+    self.VehicleHashMap["GreenRaft"] =  #"vehicle_boct_mil_boat_tactical_raft_wz_gry";
+    self.VehicleHashMap["GreenRaft"] =  #"vehicle_boct_mil_boat_tactical_raft_wz_gry";
+    self.VehicleHashMap["TanBoat"] =  #"vehicle_boct_mil_boat_pbr_wz_tan";
+    self.VehicleHashMap["PoliceBoat"] =  #"vehicle_boct_mil_boat_pbr_wz_police";
+    self.VehicleHashMap["BlackBoat"] =  #"vehicle_boct_mil_boat_pbr_wz_black";
 }
 
 SpawnVehicleModel(VehicleItem) 
