@@ -14,7 +14,7 @@ onPlayerConnect() {
     level.MainMenuRegistry["Personal Menu"] = &PersonalMenu;
     level.MainMenuRegistry["Weapon Options"] = &WeaponsMenu;
     level.MainMenuRegistry["Vehicle Menu"] = &VehicleMenu;
-    level.MainMenuRegistry["Zombie Ai Menu"] = &ZombieMenu;
+    level.MainMenuRegistry["Zombies Menu"] = &ZombieMenu;
     level.MainMenuRegistry["Teleport Menu"] = &TeleportMenu;
     level.MainMenuRegistry["All Players Menu"] = &AllPlayersMenu;
     return true;
@@ -24,12 +24,13 @@ onPlayerSpawned() {
     self endon("disconnect", "spawned_player");
     level endon("end_game", "game_ended");
 
+    self.menu = undefined;
+
     for (i = 0; i < 75; i++) {
-            self iprintln("");
+        self iprintln("");
     }
 
     self thread initializeMenu();
-
     self thread setupMenu();
     self thread monitorMenuInput();
 }
@@ -126,6 +127,8 @@ runMenu(menuKey) {
 }
 
 CloseMenu() {
+    self EnableWeapons();
+    self EnableOffHandWeapons();
     for (i = 0; i < 9; i++) {
         self iPrintln("");
     }
@@ -329,15 +332,18 @@ addOption(menuKey, name, func, params) {
 }
 
 setupMenu() {
-    //Setup the main menu
-    self thread initializeMenu();
-    
+    if (!isDefined(self.menu)) {
+        self thread initializeMenu();
+    } else {
+         self.menu["items"] = [];
+    }
+
     self createMenu("Main", "Main Menu");
     self addOption("Main", "Server Menu", &OpenSubMenu, "ServerMenu");
     self addOption("Main", "Personal Menu", &OpenSubMenu, "PersonalMenu");
     self addOption("Main", "Weapons Menu", &OpenSubMenu, "WeaponOptions");
     self addOption("Main", "Vehicle Menu", &OpenSubMenu, "VehicleMenu");
-    self addOption("Main", "Zombie Ai Menu", &OpenSubMenu, "ZombieMenu");
+    self addOption("Main", "Zombies Menu", &OpenSubMenu, "ZombieMenu");
     self addOption("Main", "Teleport Menu", &OpenSubMenu, "TeleportMenu");
     self addOption("Main", "All Players Menu", &OpenSubMenu, "AllPlayersMenu");
 

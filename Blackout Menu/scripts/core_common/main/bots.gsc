@@ -70,22 +70,3 @@ AddBotsToGame(Amount)
         wait 0.2;
     }
 }
-
-/*
-RemoveBots(Amount) {
-    Amount = min(Amount, self.BotsInGame.size);
-    
-    for (i = 0; i < int(Amount); i++) {
-        if (self.BotsInGame[i] != undefined) {
-            self.BotsInGame[i] botdropclient();
-            self.BotsInGame[i] = undefined;
-            
-            for (j = i; j < self.BotsInGame.size - 1; j++) {
-                self.BotsInGame[j] = self.BotsInGame[j + 1];
-            }
-            self.BotsInGame[self.BotsInGame.size - 1] = undefined;
-        }
-        wait 0.2;
-    }
-}
-*/

@@ -3,73 +3,75 @@ VehicleMenu()
     init_vehicles();
 
     self createMenu("VehicleMenu", "Vehicle Menu");
-    if(level.CurrentMap == "wz_open_skyscrapers"){
-        self addOption("VehicleMenu", "Muscle Cars", &OpenSubMenu, "SpawnMuscleCars");
-        self addOption("VehicleMenu", "Motorcycles", &OpenSubMenu, "SpawnMotorcycles");
-        self addOption("VehicleMenu", "Helicopters", &OpenSubMenu, "SpawnHelicopters");
-        self addOption("VehicleMenu", "Tanks", &OpenSubMenu, "SpawnTanks");
-        self addOption("VehicleMenu", "ATVs", &OpenSubMenu, "SpawnATVs");
-        self addOption("VehicleMenu", "Cargo Trucks", &OpenSubMenu, "SpawnCargoTrucks");
-        self addOption("VehicleMenu", "SUVs", &OpenSubMenu, "SpawnSUVs");
-    }
-    self addOption("VehicleMenu", "Boats", &OpenSubMenu, "SpawnBoats");
+    if(Blackout()){
+        if(level.CurrentMap == "wz_open_skyscrapers"){
+            self addOption("VehicleMenu", "Muscle Cars", &OpenSubMenu, "SpawnMuscleCars");
+            self addOption("VehicleMenu", "Motorcycles", &OpenSubMenu, "SpawnMotorcycles");
+            self addOption("VehicleMenu", "Helicopters", &OpenSubMenu, "SpawnHelicopters");
+            self addOption("VehicleMenu", "Tanks", &OpenSubMenu, "SpawnTanks");
+            self addOption("VehicleMenu", "ATVs", &OpenSubMenu, "SpawnATVs");
+            self addOption("VehicleMenu", "Cargo Trucks", &OpenSubMenu, "SpawnCargoTrucks");
+            self addOption("VehicleMenu", "SUVs", &OpenSubMenu, "SpawnSUVs");
+        }
+        self addOption("VehicleMenu", "Boats", &OpenSubMenu, "SpawnBoats");
 
-    self createMenu("SpawnMuscleCars", "Muscle Cars");
-    self addOption("SpawnMuscleCars", "Spawn Heist Muscle Car", &SpawnVehicleModel, "HMC");
-    self addOption("SpawnMuscleCars", "Spawn Blue Muscle Car", &SpawnVehicleModel, "BMC");
-    self addOption("SpawnMuscleCars", "Spawn Green Muscle Car", &SpawnVehicleModel, "GMC");
-    self addOption("SpawnMuscleCars", "Spawn Orange Muscle Car", &SpawnVehicleModel, "OMC");
-    self addOption("SpawnMuscleCars", "Spawn Red Muscle Car", &SpawnVehicleModel, "RMC");
-    self addOption("SpawnMuscleCars", "Spawn White Muscle Car", &SpawnVehicleModel, "WMC");
-    self addOption("SpawnMuscleCars", "Spawn Yellow Muscle Car", &SpawnVehicleModel, "RMC");
-    self addOption("SpawnMuscleCars", "Spawn Black Muscle Car", &SpawnVehicleModel, "BMC2");
+        self createMenu("SpawnMuscleCars", "Muscle Cars");
+        self addOption("SpawnMuscleCars", "Spawn Heist Muscle Car", &SpawnVehicleModel, "HMC");
+        self addOption("SpawnMuscleCars", "Spawn Blue Muscle Car", &SpawnVehicleModel, "BMC");
+        self addOption("SpawnMuscleCars", "Spawn Green Muscle Car", &SpawnVehicleModel, "GMC");
+        self addOption("SpawnMuscleCars", "Spawn Orange Muscle Car", &SpawnVehicleModel, "OMC");
+        self addOption("SpawnMuscleCars", "Spawn Red Muscle Car", &SpawnVehicleModel, "RMC");
+        self addOption("SpawnMuscleCars", "Spawn White Muscle Car", &SpawnVehicleModel, "WMC");
+        self addOption("SpawnMuscleCars", "Spawn Yellow Muscle Car", &SpawnVehicleModel, "RMC");
+        self addOption("SpawnMuscleCars", "Spawn Black Muscle Car", &SpawnVehicleModel, "BMC2");
 
-    self createMenu("SpawnMotorcycles", "Motorcycles");
-    self addOption("SpawnMotorcycles", "Spawn White Motorcycle", &SpawnVehicleModel, "WM1");
-    self addOption("SpawnMotorcycles", "Spawn Grey Motorcycle", &SpawnVehicleModel, "GM1");
-    self addOption("SpawnMotorcycles", "Spawn Green Motorcycle", &SpawnVehicleModel, "GM2");
-    self addOption("SpawnMotorcycles", "Spawn Dark Motorcycle", &SpawnVehicleModel, "DM1");
-    self addOption("SpawnMotorcycles", "Spawn Light Grey Motorcycle", &SpawnVehicleModel, "LG1");
+        self createMenu("SpawnMotorcycles", "Motorcycles");
+        self addOption("SpawnMotorcycles", "Spawn White Motorcycle", &SpawnVehicleModel, "WM1");
+        self addOption("SpawnMotorcycles", "Spawn Grey Motorcycle", &SpawnVehicleModel, "GM1");
+        self addOption("SpawnMotorcycles", "Spawn Green Motorcycle", &SpawnVehicleModel, "GM2");
+        self addOption("SpawnMotorcycles", "Spawn Dark Motorcycle", &SpawnVehicleModel, "DM1");
+        self addOption("SpawnMotorcycles", "Spawn Light Grey Motorcycle", &SpawnVehicleModel, "LG1");
 
-    self createMenu("SpawnHelicopters", "Helicopters");
-    self addOption("SpawnHelicopters", "Spawn Helicopter 1", &SpawnVehicleModel, "H1");
-    self addOption("SpawnHelicopters", "Spawn Helicopter 2", &SpawnVehicleModel, "H2");
-    self addOption("SpawnHelicopters", "Spawn Helicopter 3", &SpawnVehicleModel, "H3");
-    self addOption("SpawnHelicopters", "Spawn Helicopter 4", &SpawnVehicleModel, "H4");
+        self createMenu("SpawnHelicopters", "Helicopters");
+        self addOption("SpawnHelicopters", "Spawn Helicopter 1", &SpawnVehicleModel, "H1");
+        self addOption("SpawnHelicopters", "Spawn Helicopter 2", &SpawnVehicleModel, "H2");
+        self addOption("SpawnHelicopters", "Spawn Helicopter 3", &SpawnVehicleModel, "H3");
+        self addOption("SpawnHelicopters", "Spawn Helicopter 4", &SpawnVehicleModel, "H4");
 
-    self createMenu("SpawnTanks", "Tanks");
-    self addOption("SpawnTanks", "Spawn Dark Grey Tank", &SpawnVehicleModel, "TankDarkGrey");
-    self addOption("SpawnTanks", "Spawn Green Tank", &SpawnVehicleModel, "TankGreen");
-    self addOption("SpawnTanks", "Spawn Light Grey Tank", &SpawnVehicleModel, "TankLightGrey");
-    self addOption("SpawnTanks", "Spawn White Tank", &SpawnVehicleModel, "TankWhite");
+        self createMenu("SpawnTanks", "Tanks");
+        self addOption("SpawnTanks", "Spawn Dark Grey Tank", &SpawnVehicleModel, "TankDarkGrey");
+        self addOption("SpawnTanks", "Spawn Green Tank", &SpawnVehicleModel, "TankGreen");
+        self addOption("SpawnTanks", "Spawn Light Grey Tank", &SpawnVehicleModel, "TankLightGrey");
+        self addOption("SpawnTanks", "Spawn White Tank", &SpawnVehicleModel, "TankWhite");
 
-    self createMenu("SpawnATVs", "ATVs");
-    self addOption("SpawnATVs", "Spawn ATV 1", &SpawnVehicleModel, "ATV1");
-    self addOption("SpawnATVs", "Spawn ATV 2", &SpawnVehicleModel, "ATV2");
-    self addOption("SpawnATVs", "Spawn Green ATV", &SpawnVehicleModel, "ATVGreen");
-    self addOption("SpawnATVs", "Spawn Police ATV", &SpawnVehicleModel, "ATVPolice");
+        self createMenu("SpawnATVs", "ATVs");
+        self addOption("SpawnATVs", "Spawn ATV 1", &SpawnVehicleModel, "ATV1");
+        self addOption("SpawnATVs", "Spawn ATV 2", &SpawnVehicleModel, "ATV2");
+        self addOption("SpawnATVs", "Spawn Green ATV", &SpawnVehicleModel, "ATVGreen");
+        self addOption("SpawnATVs", "Spawn Police ATV", &SpawnVehicleModel, "ATVPolice");
 
-    self createMenu("SpawnCargoTrucks", "Cargo Trucks");
-    self addOption("SpawnCargoTrucks", "Spawn Dark Cargo Truck", &SpawnVehicleModel, "CargoDark");
-    self addOption("SpawnCargoTrucks", "Spawn Green Cargo Truck", &SpawnVehicleModel, "CargoGreen");
-    self addOption("SpawnCargoTrucks", "Spawn Grey Cargo Truck", &SpawnVehicleModel, "CargoGrey");
+        self createMenu("SpawnCargoTrucks", "Cargo Trucks");
+        self addOption("SpawnCargoTrucks", "Spawn Dark Cargo Truck", &SpawnVehicleModel, "CargoDark");
+        self addOption("SpawnCargoTrucks", "Spawn Green Cargo Truck", &SpawnVehicleModel, "CargoGreen");
+        self addOption("SpawnCargoTrucks", "Spawn Grey Cargo Truck", &SpawnVehicleModel, "CargoGrey");
 
-    self createMenu("SpawnSUVs", "SUVs");
-    self addOption("SpawnSUVs", "Spawn Police SUV", &SpawnVehicleModel, "SUVPolice");
-    self addOption("SpawnSUVs", "Spawn Black SUV", &SpawnVehicleModel, "SUVBlack");
-    self addOption("SpawnSUVs", "Spawn Grey SUV", &SpawnVehicleModel, "SUVGrey");
-    self addOption("SpawnSUVs", "Spawn Silver SUV", &SpawnVehicleModel, "SUVSilver");
-    self addOption("SpawnSUVs", "Spawn White SUV", &SpawnVehicleModel, "SUVWhite");
-    self addOption("SpawnSUVs", "Spawn Black Light SUV", &SpawnVehicleModel, "SUVBlackLight");
+        self createMenu("SpawnSUVs", "SUVs");
+        self addOption("SpawnSUVs", "Spawn Police SUV", &SpawnVehicleModel, "SUVPolice");
+        self addOption("SpawnSUVs", "Spawn Black SUV", &SpawnVehicleModel, "SUVBlack");
+        self addOption("SpawnSUVs", "Spawn Grey SUV", &SpawnVehicleModel, "SUVGrey");
+        self addOption("SpawnSUVs", "Spawn Silver SUV", &SpawnVehicleModel, "SUVSilver");
+        self addOption("SpawnSUVs", "Spawn White SUV", &SpawnVehicleModel, "SUVWhite");
+        self addOption("SpawnSUVs", "Spawn Black Light SUV", &SpawnVehicleModel, "SUVBlackLight");
 
-    self createMenu("SpawnBoats", "Boats");
-    self addOption("SpawnBoats", "Black Raft", &SpawnVehicleModel, "BlackRaft");
-    self addOption("SpawnBoats", "Grey Raft", &SpawnVehicleModel, "GreyRaft");
-    
-    if(level.CurrentMap == "wz_open_skyscrapers"){
-        self addOption("SpawnBoats", "Tan Military Boat", &SpawnVehicleModel, "TanBoat");
-        self addOption("SpawnBoats", "Tan Military Boat", &SpawnVehicleModel, "BlackBoat");
-        self addOption("SpawnBoats", "Police Military Boat", &SpawnVehicleModel, "PoliceBoat");
+        self createMenu("SpawnBoats", "Boats");
+        self addOption("SpawnBoats", "Black Raft", &SpawnVehicleModel, "BlackRaft");
+        self addOption("SpawnBoats", "Grey Raft", &SpawnVehicleModel, "GreyRaft");
+        
+        if(level.CurrentMap == "wz_open_skyscrapers"){
+            self addOption("SpawnBoats", "Tan Military Boat", &SpawnVehicleModel, "TanBoat");
+            self addOption("SpawnBoats", "Tan Military Boat", &SpawnVehicleModel, "BlackBoat");
+            self addOption("SpawnBoats", "Police Military Boat", &SpawnVehicleModel, "PoliceBoat");
+        }
     }
 }
 

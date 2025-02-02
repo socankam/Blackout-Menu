@@ -2,7 +2,13 @@ PersonalMenu(){
     self createMenu("PersonalMenu", "Personal Menu");
     self addOption("PersonalMenu", "Personal Options", &OpenSubMenu, "PersonalOptions");
     self addOption("PersonalMenu", "Misc. Fun Menu", &OpenSubMenu, "FunOptions");
-    self addOption("PersonalMenu", "Armor Menu", &OpenSubMenu, "ArmorMenu");
+    if(Multiplayer()){
+        self addOption("PersonalMenu", "Specialist Menu", &OpenSubMenu, "SpecialistMenu");
+        self addOption("PersonalMenu", "Killstreaks Menu", &OpenSubMenu, "KillstreaksMenu");
+    }
+    if(Blackout()){
+        self addOption("PersonalMenu", "Armor Menu", &OpenSubMenu, "ArmorMenu");
+    }
     self addOption("PersonalMenu", "Perk Menu", &OpenSubMenu, "PerkMenu");
 
     self createMenu("PersonalOptions", "Personal Options");
@@ -10,7 +16,12 @@ PersonalMenu(){
     self addToggleOption("PersonalOptions", "Infinite UAV", &InfiniteUAV, false);
     self addToggleOption("PersonalOptions", "Unlimited Ammo", &UnlimitedAmmo, false);
     self addToggleOption("PersonalOptions", "Walk Out Of Bounds", &WalkOutOfBounds, false);
-    self addToggleOption("PersonalOptions", "Unfair Aimbot", &StartUnfairAimbot, false);
+    if(Blackout() || Multiplayer()){
+        self addToggleOption("PersonalOptions", "Unfair Aimbot", &StartUnfairAimbot, false);
+    }
+    if(Zombies()){
+        self addToggleOption("PersonalOptions", "Unfair Aimbot", &ZombiesAimbot, false);
+    }
     self addToggleOption("PersonalOptions", "Force Host", &ForceHost, false);
     self addToggleOption("PersonalOptions", "Third Person Mode", &ThirdPerson, false);
     self addToggleOption("PersonalOptions", "Rapid Fire", &RapidFire, false);
@@ -27,6 +38,23 @@ PersonalMenu(){
     self addOption("FunOptions", "Don't Show On Sensor Darts", &SetToPlayer, "specialty_nottargetedbysensors");
     self addOption("FunOptions", "Clone Yourself", &Clone, []);
     self addOption("FunOptions", "Invisible Weapon", &HideWeapon, []);
+    self addOption("FunOptions", "Bare Hands", &GivePlayerWeapon, "bare_hands");
+
+    self createMenu("SpecialistMenu", "Specialist Menu");
+    self addOption("SpecialistMenu", "Give Annihilator", &GivePlayerWeapon, "hero_annihilator");
+    self addOption("SpecialistMenu", "Give Barricade", &GivePlayerWeapon, "ability_smart_cover");
+    self addOption("SpecialistMenu", "Give Sparrow", &GivePlayerWeapon, "hero_bowlauncher");
+    self addOption("SpecialistMenu", "Give Flamethrower", &GivePlayerWeapon, "hero_flamethrower");
+    self addOption("SpecialistMenu", "Give Tempest", &GivePlayerWeapon, "shock_rifle");
+    self addOption("SpecialistMenu", "Give Black Ops 3 Tempest", &GivePlayerWeapon, "hero_lightninggun");
+    self addOption("SpecialistMenu", "Give War Machine", &GivePlayerWeapon, "hero_pineapplegun");
+
+    self createMenu("KillstreaksMenu", "Killstreaks Menu");
+    self addOption("KillstreaksMenu", "Call In UAV", &GivePlayerWeapon, "uav");
+    self addOption("KillstreaksMenu", "Call In Counter UAV", &GivePlayerWeapon, "counteruav");
+    self addOption("KillstreaksMenu", "Call In Drone Squadron", &GivePlayerWeapon, "drone_squadron");
+    self addOption("KillstreaksMenu", "Call In Snipers Nest", &GivePlayerWeapon, "overwatch_helicopter");
+    self addOption("KillstreaksMenu", "Call In Thresher", &GivePlayerWeapon, "straferun");
 
     self createMenu("ArmorMenu", "Armor Menu");
     self addOption("ArmorMenu", "Set Level 1 Armor", &SetToPlayer, "specialty_armor,Armor");
@@ -34,14 +62,28 @@ PersonalMenu(){
     self addOption("ArmorMenu", "Set Level 3 Armor", &SetToPlayer, "specialty_armor_tier_three,Armor");
 
     self createMenu("PerkMenu", "Perk Menu");
-    self addOption("PerkMenu", "Give Brawler", &SetToPlayer, "specialty_brawler,Perk");
-    self addOption("PerkMenu", "Give Consumer", &SetToPlayer, "specialty_consumer,Perk");
-    self addOption("PerkMenu", "Give Mobility", &SetToPlayer, "specialty_sprintspeed,Perk");
-    self addOption("PerkMenu", "Give Dead Silence", &SetToPlayer, "specialty_quieter,Perk");
-    self addOption("PerkMenu", "Give Outlander", &SetToPlayer, "specialty_outlander,Perk");
-    self addOption("PerkMenu", "Give Awareness", &SetToPlayer, "specialty_awareness,Perk");
-    self addOption("PerkMenu", "Give Paranoia", &SetToPlayer, "specialty_paranoia,Perk");
-    self addOption("PerkMenu", "Give Looter", &SetToPlayer, "specialty_looter,Perk");
+    if(Blackout()){
+        self addOption("PerkMenu", "Give Dead Silence", &SetToPlayer, "specialty_quieter,Perk");
+        self addOption("PerkMenu", "Give Brawler", &SetToPlayer, "specialty_brawler,Perk");
+        self addOption("PerkMenu", "Give Consumer", &SetToPlayer, "specialty_consumer,Perk");
+        self addOption("PerkMenu", "Give Mobility", &SetToPlayer, "specialty_sprintspeed,Perk");
+        self addOption("PerkMenu", "Give Outlander", &SetToPlayer, "specialty_outlander,Perk");
+        self addOption("PerkMenu", "Give Awareness", &SetToPlayer, "specialty_awareness,Perk");
+        self addOption("PerkMenu", "Give Paranoia", &SetToPlayer, "specialty_paranoia,Perk");
+        self addOption("PerkMenu", "Give Looter", &SetToPlayer, "specialty_looter,Perk");
+
+    }
+    if(Multiplayer() || Zombies()){
+        self addOption("PerkMenu", "Give Dead Silence", &SetToPlayer, "specialty_quieter,Perk");
+        self addOption("PerkMenu", "Give Fast Reload", &SetToPlayer, "specialty_fastreload,Perk");
+        self addOption("PerkMenu", "Give Fast Weapon Switch", &SetToPlayer, "specialty_fastweaponswitch,Perk");
+        self addOption("PerkMenu", "Give Fast ADS", &SetToPlayer, "specialty_fastads,Perk");
+        self addOption("PerkMenu", "Give Accuracy and Flat Spread", &SetToPlayer, "specialty_accuracyandflatspread,Perk");
+        self addOption("PerkMenu", "Give Scavenger", &SetToPlayer, "specialty_scavenger,Perk");
+        self addOption("PerkMenu", "Give Bullet Accuracy", &SetToPlayer, "specialty_bulletaccuracy,Perk");
+        self addOption("PerkMenu", "Give More Bullet Damage", &SetToPlayer, "specialty_bulletdamage,Perk");
+        self addOption("PerkMenu", "Give Fast Speed", &SetToPlayer, "specialty_playeriszombie,Perk");
+    }
 }
 
 SetToPlayer(argString)
@@ -55,7 +97,12 @@ SetToPlayer(argString)
     {
         type = args[1];
         if(type == "Perk" || type == "Armor"){
-            self iPrintlnBold("^2 " + type + "^7 given! You won't see it at the bottom.");
+            if(Blackout() || Zombies()){
+                self iPrintlnBold("^2 " + type + "^7 set! You won't see it at the bottom.");
+            }
+            else{
+                self iPrintlnBold("^2 " + type + "^7 set!");
+            }
         }
         else{
             self iPrintlnBold("^2Enabled!");

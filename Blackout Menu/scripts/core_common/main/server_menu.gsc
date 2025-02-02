@@ -2,11 +2,16 @@ ServerMenu(){
     self createMenu("ServerMenu", "Server Menu");
     self addOption("ServerMenu", "Lobby Settings", &OpenSubMenu, "LobbyMenu");
     self addOption("ServerMenu", "Change Map", &OpenSubMenu, "MapMenu");
-    self addOption("ServerMenu", "Change Game Mode", &OpenSubMenu, "GameModeMenu");
+    self addOption("ServerMenu", "Restart Map", &RestartMap, []);
+    if(Blackout() || Multiplayer()){
+        self addOption("ServerMenu", "Change Game Mode", &OpenSubMenu, "GameModeMenu");
+    }
 
     self createMenu("LobbyMenu", "Lobby Settings");
     self addOption("LobbyMenu", "Fun Lobby Options", &OpenSubMenu, "FunLobbyOptions");
-    self addOption("LobbyMenu", "Bot Options Menu", &OpenSubMenu, "BotMenu");
+    if(Blackout() || Multiplayer()){
+        self addOption("LobbyMenu", "Bot Options Menu", &OpenSubMenu, "BotMenu");
+    }
 
     self createMenu("FunLobbyOptions", "Fun Lobby Options");
     self addToggleOption("FunLobbyOptions", "Super Jump", &SuperJump, false);
@@ -17,13 +22,66 @@ ServerMenu(){
     self createMenu("BotMenu", "Bot Options Menu");
     self addOption("BotMenu", "Add Bot", &AddBotsToGame, "1");
     self addOption("BotMenu", "Add Max Amount Of Bots", &AddBotsToGame, "11");
-
+    
     self createMenu("MapMenu", "Change Map");
-    self addOption("MapMenu", "Default Map", &ChangeMap, "wz_open_skyscrapers");
-    self addOption("MapMenu", "Alcatraz", &ChangeMap, "wz_escape");
-    self addOption("MapMenu", "Alcatraz (Night)", &ChangeMap, "wz_escape_alt");
+    if(Blackout()){
+        self addOption("MapMenu", "Default Map", &ChangeMap, "wz_open_skyscrapers");
+        self addOption("MapMenu", "Alcatraz", &ChangeMap, "wz_escape");
+        self addOption("MapMenu", "Alcatraz (Night)", &ChangeMap, "wz_escape_alt");
+    }
+
+    if(Multiplayer()){
+        self addOption("MapMenu", "Der Schatten", &ChangeMap, "mp_austria");
+        self addOption("MapMenu", "Havana", &ChangeMap, "mp_cairo");
+        self addOption("MapMenu", "Casino", &ChangeMap, "mp_casino");
+        self addOption("MapMenu", "Launch", &ChangeMap, "mp_cosmodrome");
+        self addOption("MapMenu", "Elevation", &ChangeMap, "mp_elevation");
+        self addOption("MapMenu", "Masquerade", &ChangeMap, "mp_embassy");
+        self addOption("MapMenu", "Firing Range", &ChangeMap, "mp_firingrange2");
+        self addOption("MapMenu", "Firing Range Night", &ChangeMap, "mp_firingrange2_alt");
+        self addOption("MapMenu", "Frequency", &ChangeMap, "mp_frenetic");
+        self addOption("MapMenu", "Artifact", &ChangeMap, "mp_geothermal");
+        self addOption("MapMenu", "Gridlock", &ChangeMap, "mp_gridlock");
+        self addOption("MapMenu", "Grind", &ChangeMap, "mp_grind");
+        self addOption("MapMenu", "Hacienda", &ChangeMap, "mp_hacienda");
+        self addOption("MapMenu", "Hacienda Twilight", &ChangeMap, "mp_hacienda_alt");
+        self addOption("MapMenu", "Icebreaker", &ChangeMap, "mp_icebreaker");
+        self addOption("MapMenu", "Jungle Flooded", &ChangeMap, "mp_jungle2");
+        self addOption("MapMenu", "Jungle", &ChangeMap, "mp_jungle2_alt");
+        self addOption("MapMenu", "Madagascar", &ChangeMap, "mp_madagascar");
+        self addOption("MapMenu", "Lair", &ChangeMap, "mp_maldives");
+        self addOption("MapMenu", "Militia", &ChangeMap, "mp_militia");
+        self addOption("MapMenu", "Morocco", &ChangeMap, "mp_morocco");
+        self addOption("MapMenu", "Summit", &ChangeMap, "mp_mountain2");
+        self addOption("MapMenu", "Nuketown", &ChangeMap, "mp_nuketown_4");
+        self addOption("MapMenu", "Contraband", &ChangeMap, "mp_offshore");
+        self addOption("MapMenu", "Contraband Hurricane", &ChangeMap, "mp_offshore_alt");
+        self addOption("MapMenu", "WMD", &ChangeMap, "mp_russianbase");
+        self addOption("MapMenu", "Seaside", &ChangeMap, "mp_seaside");
+        self addOption("MapMenu", "Seaside Sunset", &ChangeMap, "mp_seaside_alt");
+        self addOption("MapMenu", "Payload", &ChangeMap, "mp_silo");
+        self addOption("MapMenu", "Slums", &ChangeMap, "mp_slums2");
+        self addOption("MapMenu", "Lockup", &ChangeMap, "mp_station");
+        self addOption("MapMenu", "Arsenal", &ChangeMap, "mp_urban");
+        self addOption("MapMenu", "Arsenal Sandstorm", &ChangeMap, "mp_urban_alt");
+        self addOption("MapMenu", "Remnant", &ChangeMap, "mp_zombie_museum");
+    }
+
+    if(Zombies()){
+        self addOption("MapMenu", "IX", &ChangeMap, "zm_towers");
+        self addOption("MapMenu", "Blood Of The Dead", &ChangeMap, "zm_escape");
+        self addOption("MapMenu", "Voyage of Despair", &ChangeMap, "zm_zodt8");
+        self addOption("MapMenu", "Dead of The Night", &ChangeMap, "zm_mansion");
+        self addOption("MapMenu", "Ancient Evil", &ChangeMap, "zm_red");
+        self addOption("MapMenu", "Alpha Omega", &ChangeMap, "zm_white");
+        self addOption("MapMenu", "Classified", &ChangeMap, "zm_office");
+        self addOption("MapMenu", "Tag Der Toten", &ChangeMap, "zm_orange");
+    }
 
     self createMenu("GameModeMenu", "Change Game Mode");
+    if(Multiplayer()){
+        self addToggleOption("GameModeMenu", "Roll The Dice", &initrollthedice, false);
+    }
     if(level.CurrentMap == "wz_open_skyscrapers"){
         self addOption("GameModeMenu", "Solo", &ChangeMode, "warzone_solo");
         self addOption("GameModeMenu", "Duos", &ChangeMode, "warzone_duo");
@@ -38,25 +96,6 @@ ServerMenu(){
         self addOption("GameModeMenu", "Duos", &ChangeMode, "warzone_escape_duo_dbno");
         self addOption("GameModeMenu", "Quads", &ChangeMode, "warzone_escape_quad_dbno");
     }
-}
-
-ChangeMap(Map) {
-    if (level.CurrentMap == Map){
-        self iPrintLnBold("Map is already loaded!");
-    }
-    else{
-        map(map);
-        wait(1);
-        switchmap_switch();
-    }
-
-}
-
-ChangeMode(mode) {
-    map = util::get_map_name();
-    switchmap_load(map, mode);
-    wait(1);
-    switchmap_switch();
 }
 
 SuperJump()
